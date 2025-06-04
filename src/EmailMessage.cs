@@ -66,16 +66,16 @@ public sealed class EmailMessage : Message
     /// <summary>
     /// Path to the file containing the email body content.
     /// </summary>
-    [JsonPropertyName("bodyFile")]
-    [JsonProperty("bodyFile")]
-    public string BodyFile { get; set; } = null!;
+    [JsonPropertyName("contentFileName")]
+    [JsonProperty("contentFileName")]
+    public string? ContentFileName { get; set; }
 
     /// <summary>
     /// Optional path to a file used as the template for the email.
     /// </summary>
-    [JsonPropertyName("templateFile")]
-    [JsonProperty("templateFile")]
-    public string? TemplateFile { get; set; }
+    [JsonPropertyName("templateFileName")]
+    [JsonProperty("templateFileName")]
+    public string? TemplateFileName { get; set; }
 
     /// <summary>
     /// Format of the email body (e.g., HTML or PlainText).
