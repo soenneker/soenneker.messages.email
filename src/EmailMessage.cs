@@ -11,7 +11,7 @@ namespace Soenneker.Messages.Email;
 /// <summary>
 /// A Service Bus message for emails
 /// </summary>
-public class EmailMessage : Message
+public sealed class EmailMessage : Message
 {
     /// <summary>
     /// List of recipient email addresses.
@@ -90,6 +90,13 @@ public class EmailMessage : Message
     [JsonPropertyName("priority")]
     [JsonProperty("priority")]
     public EmailPriority Priority { get; set; }
+
+    /// <summary>
+    /// For replacement
+    /// </summary>
+    [JsonPropertyName("tokens")]
+    [JsonProperty("tokens")]
+    public Dictionary<string, string>? Tokens { get; set; }
 
     /// <summary>
     /// Constructs a new <see cref="EmailMessage"/> and sets the service bus queue as "email".
