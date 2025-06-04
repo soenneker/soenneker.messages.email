@@ -92,11 +92,18 @@ public sealed class EmailMessage : Message
     public EmailPriority Priority { get; set; }
 
     /// <summary>
-    /// For replacement
+    /// Token = anything inside {{…}} that Scriban will evaluate/repla­ce at render time.
     /// </summary>
     [JsonPropertyName("tokens")]
     [JsonProperty("tokens")]
     public Dictionary<string, string>? Tokens { get; set; }
+
+    /// <summary>
+    /// Partial = a separate, named chunk of template (or template text) you preload into the context so you can “call” or “include” it from your main template.
+    /// </summary>
+    [JsonPropertyName("partials")]
+    [JsonProperty("partials")]
+    public Dictionary<string, string>? Partials { get; set; }
 
     /// <summary>
     /// Constructs a new <see cref="EmailMessage"/> and sets the service bus queue as "email".
