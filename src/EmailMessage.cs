@@ -47,14 +47,14 @@ public sealed class EmailMessage : Message
     /// </summary>
     [JsonPropertyName("name")]
     [JsonProperty("name")]
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
     /// <summary>
     /// Email address of the sender.
     /// </summary>
     [JsonPropertyName("address")]
     [JsonProperty("address")]
-    public string Address { get; set; } = null!;
+    public string? Address { get; set; }
 
     /// <summary>
     /// Subject of the email message.
