@@ -11,7 +11,7 @@ namespace Soenneker.Messages.Email;
 /// <summary>
 /// A Service Bus message for emails
 /// </summary>
-public sealed class EmailMessage : Message
+public class EmailMessage : Message
 {
     /// <summary>
     /// List of recipient email addresses.
