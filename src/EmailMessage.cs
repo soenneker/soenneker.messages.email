@@ -9,106 +9,107 @@ using Soenneker.Enums.Email.Priority;
 namespace Soenneker.Messages.Email;
 
 /// <summary>
-/// A Service Bus message for emails
+/// Represents a Service Bus message for email delivery.
 /// </summary>
-public class EmailMessage : Message
+/// <remarks>
+/// This message contains all metadata and content references required
+/// to render and send an email. The base <see cref="Message"/> envelope
+/// supplies routing and auditing information.
+/// </remarks>
+public sealed class EmailMessage : Message
 {
     /// <summary>
-    /// List of recipient email addresses.
+    /// Gets the primary recipient email addresses.
+    /// At least one recipient is required.
     /// </summary>
     [Required, MinLength(1)]
     [JsonPropertyName("to")]
-    [JsonProperty("to")]
-    public List<string> To { get; set; } = null!;
+    [JsonProperty("to", Required = Required.Always)]
+    public required List<string> To { get; init; }
 
     /// <summary>
-    /// List of Carbon Copy (CC) recipient email addresses.
+    /// Gets the Carbon Copy (CC) recipient email addresses.
     /// </summary>
     [JsonPropertyName("cc")]
     [JsonProperty("cc")]
-    public List<string>? Cc { get; set; }
+    public List<string>? Cc { get; init; }
 
     /// <summary>
-    /// List of Blind Carbon Copy (BCC) recipient email addresses.
+    /// Gets the Blind Carbon Copy (BCC) recipient email addresses.
     /// </summary>
     [JsonPropertyName("bcc")]
     [JsonProperty("bcc")]
-    public List<string>? Bcc { get; set; }
+    public List<string>? Bcc { get; init; }
 
     /// <summary>
-    /// Email address used in the Reply-To header.
+    /// Gets the Reply-To email address.
     /// </summary>
     [JsonPropertyName("replyTo")]
     [JsonProperty("replyTo")]
-    public string? ReplyTo { get; set; }
+    public string? ReplyTo { get; init; }
 
     /// <summary>
-    /// Display name of the sender.
+    /// Gets the display name of the sender.
     /// </summary>
     [JsonPropertyName("name")]
     [JsonProperty("name")]
-    public string? Name { get; set; }
+    public string? Name { get; init; }
 
     /// <summary>
-    /// Email address of the sender.
+    /// Gets the sender email address.
     /// </summary>
     [JsonPropertyName("address")]
     [JsonProperty("address")]
-    public string? Address { get; set; }
+    public string? Address { get; init; }
 
     /// <summary>
-    /// Subject of the email message.
+    /// Gets the subject line of the email.
     /// </summary>
+    [Required]
     [JsonPropertyName("subject")]
-    [JsonProperty("subject")]
-    public string Subject { get; set; } = null!;
+    [JsonProperty("subject", Required = Required.Always)]
+    public required string Subject { get; init; }
 
     /// <summary>
-    /// Path to the file containing the email body content.
+    /// Gets the file name containing the email body content.
     /// </summary>
     [JsonPropertyName("contentFileName")]
     [JsonProperty("contentFileName")]
-    public string? ContentFileName { get; set; }
+    public string? ContentFileName { get; init; }
 
     /// <summary>
-    /// Optional path to a file used as the template for the email.
+    /// Gets the optional template file name used to render the email.
     /// </summary>
     [JsonPropertyName("templateFileName")]
     [JsonProperty("templateFileName")]
-    public string? TemplateFileName { get; set; }
+    public string? TemplateFileName { get; init; }
 
     /// <summary>
-    /// Format of the email body (e.g., HTML or PlainText).
+    /// Gets the email body format (e.g., HTML or PlainText).
     /// </summary>
     [JsonPropertyName("format")]
     [JsonProperty("format")]
-    public EmailFormat Format { get; set; }
+    public required EmailFormat Format { get; init; }
 
     /// <summary>
-    /// Priority of the email (e.g., Low, Normal, High).
+    /// Gets the priority level of the email.
     /// </summary>
     [JsonPropertyName("priority")]
     [JsonProperty("priority")]
-    public EmailPriority Priority { get; set; }
+    public required EmailPriority Priority { get; init; }
 
     /// <summary>
-    /// Token = anything inside {{…}} that Scriban will evaluate/repla­ce at render time.
+    /// Gets the token values used for template rendering.
+    /// Keys correspond to placeholders within the template.
     /// </summary>
     [JsonPropertyName("tokens")]
     [JsonProperty("tokens")]
-    public Dictionary<string, string>? Tokens { get; set; }
+    public Dictionary<string, string>? Tokens { get; init; }
 
     /// <summary>
-    /// Partial = a separate, named chunk of template (or template text) you preload into the context so you can “call” or “include” it from your main template.
+    /// Gets named partial template fragments available during rendering.
     /// </summary>
     [JsonPropertyName("partials")]
     [JsonProperty("partials")]
-    public Dictionary<string, string>? Partials { get; set; }
-
-    /// <summary>
-    /// Constructs a new <see cref="EmailMessage"/> and sets the service bus queue as "email".
-    /// </summary>
-    public EmailMessage() : base("email")
-    {
-    }
+    public Dictionary<string, string>? Partials { get; init; }
 }
