@@ -46,6 +46,6 @@
     <ItemGroup>
         <PackageReference Include="Soenneker.Enums.Email.Format" Version="4.0.92" />
         <PackageReference Include="Soenneker.Enums.Email.Priority" Version="4.0.92" />
-        <PackageReference Include="Soenneker.Messages.Base" Version="4.0.1135" />
+        <PackageReference Include="Soenneker.Messages.Base" Version="4.0.1137" />
     </ItemGroup>
 </Project>
