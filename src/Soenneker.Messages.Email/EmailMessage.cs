@@ -22,7 +22,7 @@ public sealed class EmailMessage : Message
     /// Gets the primary recipient email addresses.
     /// At least one recipient is required.
     /// </summary>
-    [Required, MinLength(1)]
+    [Required, ListNotEmpty]
     [JsonPropertyName("to")]
     [JsonProperty("to", Required = Required.Always)]
     public required List<string> To { get; set; }
